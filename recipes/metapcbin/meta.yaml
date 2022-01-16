@@ -29,9 +29,9 @@ requirements:
     - blast >=2.10.1
     - infernal >=1.1.4
     - mummer4 >=4.0.0beta2
-    - tqdm >=4.62.2
+    - tqdm >=4.28.1
     - scikit-learn >=1.0.1
-    - torch >=1.9.0
+    - pytorch >=1.9.0
     - torchvision >=0.10.0
     - matplotlib-base >=3.4.3 
     - numpy >=1.21.4  
