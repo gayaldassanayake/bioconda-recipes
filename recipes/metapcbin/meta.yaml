@@ -1,0 +1,55 @@
+{% set version = "0.1.1" %}
+{% set sha256 = "a61ea24fc0fbf2017f4a1e26ba8c74a5eeb87e46bbaeec70d382db56947e3330" %}
+
+package:
+  name: metapcbin
+  version: '{{ version }}'
+
+source:
+  - url: https://github.com/MetaGSC/MetaPCbin/archive/v{{ version }}.tar.gz
+    sha256: '{{ sha256 }}'
+  - url: https://github.com/anuradhawick/seq2vec/archive/v1.0.tar.gz
+    sha256: ae39dbcf3d36eeb2940995086a59fba27d94afa66d9cc40e0004e7f6a5abb94d
+    folder: tools
+
+build:
+  noarch: python
+  number: 0
+  script: python -m pip install --no-deps --ignore-installed .
+  entry_points:
+    - metapcbin = metapcbin.pipeline:pipeline
+
+requirements:
+  host:
+    - python >=3
+    - pip
+  run:
+    - python >=3
+    - biopython >=1.78
+    - blast >=2.10.1
+    - infernal >=1.1.4
+    - mummer4 >=4.0.0beta2
+
+test:
+  import:
+    - Bio.SeqIO
+  commands:
+    - metapcbin -h
+    - cmscan -h
+    - nucmer -V
+    - blastn -help
+    - ./seq2vec -h
+
+about:
+  home: https://github.com/MetaGSC/MetaPCbin
+  license: MIT
+  license_family: MIT
+  license_file: LICENSE
+  summary: Plasmid, Chromosome classification of DNA sequences.
+  dev_url: https://github.com/MetaGSC/MetaPCbin
+
+extra:
+  recipe-maintainers:
+    - chamikaCN
+    - gayaldassanayake
+    - SasinduDilshara
